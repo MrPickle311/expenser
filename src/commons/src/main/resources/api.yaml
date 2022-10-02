@@ -6,9 +6,5 @@ info:
 servers:
   - url: 'https'
 paths:
-  /pet:
-    get:
-      operationId: getPet
-      responses:
-        '200':
-          description: Successful operation
+
+
