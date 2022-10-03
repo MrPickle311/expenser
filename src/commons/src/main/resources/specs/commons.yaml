@@ -6,7 +6,22 @@ info:
 servers:
   - url: 'https'
 
+paths:
+
 components:
+  responses:
+    ClientError:
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: "commons.yaml#/components/schemas/Error"
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: "commons.yaml#/components/schemas/Error"
   schemas:
     Error:
       type: object

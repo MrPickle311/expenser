@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https'
+
+paths:
+  /categories:
+    get:
+      operationId: getCategories
+      responses:
+        '200':
+          description: Successfully acquired all categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoriesDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    post:
+      operationId: addCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryDto"
+      responses:
+        '200':
+          description: Successfully added category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+  /categories/{id}:
+    get:
+      operationId: getCategory
+      responses:
+        '200':
+          description: Successfully acquired category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    patch:
+      operationId: modifyCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchCategoryDto"
+      responses:
+        '200':
+          description: Successfully modified category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    delete:
+      operationId: deleteCategory
+      responses:
+        '200':
+          description: Successfully deleted category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+  /categories/{id}/subcategories:
+    get:
+      operationId: getSubcategories
+      responses:
+        '200':
+          description: Successfully acquired all subcategories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubcategoriesDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    post:
+      operationId: addSubcategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSubcategoryDto"
+      responses:
+        '200':
+          description: Successfully added subcategory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubcategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+  /categories/{id}/subcategories/id:
+    get:
+      operationId: getSubcategory
+      responses:
+        '200':
+          description: Successfully acquired subcategory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubcategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    patch:
+      operationId: modifySubcategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchCategoryDto"
+      responses:
+        '200':
+          description: Successfully modified subcategory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubcategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+    delete:
+      operationId: deleteSubcategory
+      responses:
+        '200':
+          description: Successfully deleted subcategory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubcategoryDto"
+        '400':
+          $ref: "commons.yaml#/components/responses/ClientError"
+        '500':
+          $ref: "commons.yaml#/components/responses/ServerError"
+
+components:
+  schemas:
+    CategoryDto:
+      type: object
+      properties:
+        categoryName:
+          type: string
+          required: true
+    CreateCategoryDto:
+      type: object
+      properties:
+        creationBody:
+          $ref: "#/components/schemas/CategoryDto"
+    PatchCategoryDto:
+      properties:
+        categoryName:
+          type: string
+          required: false
+    CategoriesDto:
+      type: array
+      items:
+        $ref: "#/components/schemas/CategoryDto"
+
+    SubcategoryDto:
+      type: object
+      properties:
+        subcategoryName:
+          type: string
+          required: true
+    CreateSubcategoryDto:
+      type: object
+      properties:
+        creationBody:
+          $ref: "#/components/schemas/SubcategoryDto"
+    PatchSubcategoryDto:
+      properties:
+        subcategoryName:
+          type: string
+          required: false
+    SubcategoriesDto:
+      type: array
+      items:
+        $ref: "#/components/schemas/SubcategoryDto"
